@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">JaelynnApp</string>
+    <string name="lblNama">Nama</string>
+    <string name="username_key">username</string>
 </resources>

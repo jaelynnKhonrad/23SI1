@@ -1,6 +1,8 @@
 package uph.edu.m23si1.aplikasikedua;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +18,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     Button btnRegister;
     EditText edtName;
+    SharedPreferences sharedPref;
+    SharedPreferences.Editor editor;
 
 
     @Override
@@ -28,6 +32,17 @@ public class RegisterActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
+        // inisialisasi
+        sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
+
+//        ketika dijalankan, bakal kosong...karna cuman di onCreate aja pada saat itu
+//        editor.putString(getString(R.string.username_key), edtName.getText().toString());
+//        editor.apply();
+
+
         edtName = findViewById(R.id.edtName);
         btnRegister = findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +65,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void toDashboard(){
         String nama = edtName.getText().toString();
+        editor.putString(getString(R.string.username_key), nama);
+        editor.apply();
+
         Intent intent = new Intent(this, DashboardActivity.class);
         intent.putExtra("nama",nama);
         startActivity(intent);
